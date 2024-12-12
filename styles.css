@@ -1,0 +1,66 @@
+body {
+    background: rgb(182, 218, 180);
+    font-family: 'Lucida Sans', 'Lucida Sans Regular', 'Lucida Grande', 'Lucida Sans Unicode', Geneva, Verdana, sans-serif;
+}
+
+
+
+form {
+    display: flex;
+    justify-content: center;
+}
+
+
+fieldset {
+    border-radius: 6px;
+    border-color: cadetblue;
+    padding: 20px;
+    display: flex;
+    gap: 10px;
+    flex-direction: column;
+}
+
+.answer-option {
+    border: 1px solid grey;
+    font-size: 22px;
+    padding: 10px;
+    border-radius: 8px;
+    background-color: beige;
+    transition: transform 300ms ease-in;
+
+    cursor: pointer;
+}
+
+.answer-option:hover {
+    transform: scale(1.08);
+
+}
+
+.quiz-question {
+    font-size: 24px;
+}
+
+.randomize-btn {
+    cursor: pointer;
+    background: goldenrod;
+    height: 40px;
+    margin-top: auto;
+    margin-bottom: auto;
+    margin-left: 20px;
+
+    border-radius: 6px;
+    border-color: greenyellow;
+
+    font-size: 18px;
+    padding: 16px;
+
+    display: flex;
+    justify-content: center;
+    align-items: center;
+
+    transition: transform 500ms ease-in-out;
+}
+
+.randomize-btn:hover {
+    transform: rotate(180deg);
+}
