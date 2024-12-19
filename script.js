@@ -1,78 +1,81 @@
-const quizQuestion = {
-	id: 1,
-	question: "What is the capital of Denmark?",
-	options: [
-		{ text: "Berlin", isCorrect: false },
-		{ text: "Copenhagen", isCorrect: true },
-		{ text: "Madrid", isCorrect: false },
-		{ text: "Rome", isCorrect: false },
-	],
-	explanation: "Copenhagen is the capital of Denmark.",
-};
-
 const form = document.querySelector(".quiz-form");
-const arrayOfOptions = quizQuestion.options;
+const questionInput = document.querySelector(".question-input");
+const optionsContainer = document.querySelector(".options");
+const randomizeButton = document.getElementById("randomize-btn");
+const submitButton = document.querySelector(".submit-btn");
+const radioButtons = document.querySelectorAll(".answer-radio");
+let options = [];
 
-// Function for creating of markup
-function renderOptions() {
-	form.innerHTML = `<fieldset>
-        <legend class="quiz-question">${quizQuestion.question}</legend>
-        ${arrayOfOptions
-					.map(
-						(option, index) => `<label class="answer-option">
-                <input type="radio" name="option" value="${option.text}" id="option${index}" data-correct="${option.isCorrect}">
-                ${option.text}
-            </label>`
-					)
-					.join("")}
-    </fieldset>`;
+// Submitting the form and creating the quiz Question object
+submitButton.addEventListener("click", createQuestionObject);
 
-	form.appendChild(randomizeBtn);
+// Randomizing options on button click
+randomizeButton.addEventListener("click", randomizeOptions);
 
-	const answerOption = document.querySelectorAll(".answer-option");
-	answerOption.forEach((option) => {
-		option.addEventListener("click", defineCorrectAnswer);
+// Adding click event listeners to radio buttons
+radioButtons.forEach((radio) => {
+	radio.addEventListener("click", colorizeOptions);
+});
+
+function createQuestionObject(evt) {
+	evt.preventDefault();
+
+	const question = questionInput.value;
+	const options = Array.from(document.querySelectorAll(".answer-input")).map(
+		(input, index) => ({
+			text: input.value,
+			isCorrect: document.querySelectorAll(".answer-radio")[index].checked,
+		})
+	);
+	const explanation = document.querySelector(".explan-input").value;
+
+	if (
+		options.some((option) => option.text.trim() === "") ||
+		question.trim() === "" ||
+		explanation.trim() === ""
+	) {
+		alert("Please, fill up all the fields");
+		return;
+	}
+
+	const quizQuestion = {
+		id: Date.now(),
+		question,
+		options,
+		explanation,
+	};
+
+	console.log(quizQuestion);
+	form.reset();
+}
+
+function randomizeOptions() {
+	const optionInputs = Array.from(document.querySelectorAll(".answer-input"));
+	const radioInputs = Array.from(document.querySelectorAll(".answer-radio"));
+
+	options = optionInputs.map((input, index) => ({
+		text: input.value,
+		isCorrect: radioInputs[index].checked,
+	}));
+
+	options.sort(() => Math.random() - 0.5);
+
+	options.forEach((option, index) => {
+		optionInputs[index].value = option.text;
+		radioInputs[index].checked = option.isCorrect;
+	});
+	colorizeOptions();
+}
+
+function colorizeOptions() {
+	const optionInputs = Array.from(document.querySelectorAll(".answer-input"));
+	const radioInputs = Array.from(document.querySelectorAll(".answer-radio"));
+
+	optionInputs.forEach((input, index) => {
+		if (radioInputs[index].checked) {
+			input.style.backgroundColor = "lightgreen";
+		} else {
+			input.style.backgroundColor = "lightcoral";
+		}
 	});
 }
-
-// Adding button "Randomize!"
-const randomizeBtn = document.createElement("button");
-randomizeBtn.textContent = "Randomize!";
-randomizeBtn.type = "button";
-randomizeBtn.classList.add("randomize-btn");
-randomizeBtn.addEventListener("click", randomizeOptions);
-
-// Function of definning of correct answer
-function defineCorrectAnswer(event) {
-	const selectedInput = event.currentTarget.querySelector("input");
-	const isCorrect = selectedInput.dataset.correct === "true";
-
-	if (isCorrect) {
-		event.currentTarget.style.background = "green";
-		setTimeout(() => {
-			event.target.style.background = "beige";
-			form.reset();
-		}, 1500);
-	} else {
-		event.currentTarget.style.background = "red";
-		setTimeout(() => {
-			event.target.style.background = "beige";
-			form.reset();
-		}, 1500);
-	}
-}
-
-// Function for randomizing of options, by using of Fisher-Yates shuffle method
-function randomizeOptions() {
-	for (let i = arrayOfOptions.length - 1; i > 0; i--) {
-		const randomIndex = Math.floor(Math.random() * (i + 1));
-		[arrayOfOptions[i], arrayOfOptions[randomIndex]] = [
-			arrayOfOptions[randomIndex],
-			arrayOfOptions[i],
-		];
-	}
-
-	renderOptions();
-}
-
-renderOptions();

@@ -4,49 +4,81 @@ body {
 }
 
 
-
 form {
     display: flex;
     justify-content: center;
-}
-
-
-fieldset {
-    border-radius: 6px;
-    border-color: cadetblue;
-    padding: 20px;
-    display: flex;
-    gap: 10px;
     flex-direction: column;
 }
 
-.answer-option {
+.quiz-title {
+    text-align: center;
+}
+
+.question-label {
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.question-input {
+    padding: 8px;
+    border-radius: 8px;
+    border: none;
+    font-style: italic;
+    font-size: 18px;
+}
+
+.options {
+    display: flex;
+    flex-direction: column;
+    gap: 12px;
+
+    margin: 20px auto
+}
+
+.answer-input {
     border: 1px solid grey;
-    font-size: 22px;
-    padding: 10px;
+    font-size: 18px;
+    padding: 6px;
     border-radius: 8px;
     background-color: beige;
-    transition: transform 300ms ease-in;
+    font-style: italic;
+
+    transition: transform 200ms ease-in;
 
     cursor: pointer;
 }
 
-.answer-option:hover {
-    transform: scale(1.08);
+.answer-input:hover {
+    transform: scale(1.05);
 
 }
 
-.quiz-question {
-    font-size: 24px;
+.explan-label {
+    margin-left: auto;
+    margin-right: auto;
 }
 
-.randomize-btn {
+.explan-input {
+    padding: 8px;
+    border-radius: 8px;
+    outline: 1px grey solid;
+    border: none;
+    font-style: italic;
+    font-weight: 600;
+    margin-bottom: 20px;
+}
+
+.buttons {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.randomize-btn, .submit-btn {
     cursor: pointer;
     background: goldenrod;
     height: 40px;
-    margin-top: auto;
-    margin-bottom: auto;
-    margin-left: 20px;
 
     border-radius: 6px;
     border-color: greenyellow;
@@ -63,4 +95,8 @@ fieldset {
 
 .randomize-btn:hover {
     transform: rotate(180deg);
+}
+.submit-btn {
+    background: coral;
+    border: none;
 }
