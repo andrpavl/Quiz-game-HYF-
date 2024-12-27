@@ -2,14 +2,42 @@
 <html lang="en">
 
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <link rel="stylesheet" href="./styles.css">
-    <title>Document</title>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Quiz App</title>
+  <link rel="stylesheet" href="styles.css">
 </head>
 
 <body>
-    <script src="./script.js"></script>
+  <h1 class="quiz-title">Create your Quiz-game!</h1>
+  <form action="" class="quiz-form">
+    <label class="question-label">Your question (max 140 symbols):
+      <input type="text" class="question-input" maxlength="140" placeholder="Enter your question" required>
+    </label>
+    <div class="options">
+      <label>
+        <input type="text" placeholder="Answer 1" class="answer-input">
+        <input type="radio" name="answer-correct" class="answer-radio" required></label>
+      <label>
+        <input type="text" placeholder="Answer 2" class="answer-input">
+        <input type="radio" name="answer-correct" class="answer-radio" required></label>
+      <label>
+        <input type="text" placeholder="Answer 3" class="answer-input">
+        <input type="radio" name="answer-correct" class="answer-radio" required></label>
+      <label>
+        <input type="text" placeholder="Answer 4" class="answer-input">
+        <input type="radio" name="answer-correct" class="answer-radio" required></label>
+    </div>
+    <label class="explan-label">Explanation: <input type="text" class="explan-input" placeholder="Enter the explanation"
+        required></label>
+    <div class="buttons">
+      <button type="button" id="randomize-btn" class="randomize-btn">Randomize answers</button>
+      <button type="submit" class="submit-btn">Submit</button>
+    </div>
+  </form>
+  <input type="text" class="filter-input-js filter-input" placeholder="Find in questions">
+  <ul class="questions-list-js question-list"></ul>
+  <script src="script.js"></script>
 </body>
 
 </html>
