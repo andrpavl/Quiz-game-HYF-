@@ -8,6 +8,7 @@ const questionsList = document.querySelector(".questions-list-js");
 const answerInList = document.querySelector(".item-answer");
 const filterInput = document.querySelector(".filter-input-js");
 const revealBtn = document.querySelectorAll(".reveal-btn");
+
 let options = [];
 let questions = [];
 
@@ -25,11 +26,14 @@ radioButtons.forEach((radio) => {
 // Filtering questions
 filterInput.addEventListener("input", filterQuestions);
 
+// Reveal question
 questionsList.addEventListener("click", (event) => {
 	if (event.target.classList.contains("reveal-btn")) {
 		revealAnswer(event.target);
 	}
 });
+
+
 
 function createQuestionObject(evt) {
 	evt.preventDefault();
